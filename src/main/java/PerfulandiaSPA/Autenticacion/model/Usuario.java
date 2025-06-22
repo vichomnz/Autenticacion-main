@@ -1,7 +1,11 @@
 package PerfulandiaSPA.Autenticacion.model;
 
+import java.util.ArrayList;
+
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "usuario")
@@ -21,4 +25,9 @@ public class Usuario {
 
     @Column(nullable = false)
     private String contraseña;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "rol")
+    private List<Rol> roles = new ArrayList<>();
 }

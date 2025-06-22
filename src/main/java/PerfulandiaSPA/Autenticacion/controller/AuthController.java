@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
+import java.util.List;
 
 
 @RestController
@@ -51,5 +52,10 @@ public class AuthController {
         String mensaje = autenticacionService.logout();
         RespuestaLogout respuesta = new RespuestaLogout(mensaje);
         return new ResponseEntity<>(respuesta, HttpStatus.OK);
+    }
+
+    @GetMapping("/usuarios")
+    public ResponseEntity<List<Usuario>> getAllUsuarios() {
+        return ResponseEntity.ok(autenticacionService.getAllUsuarios());
     }
 }
