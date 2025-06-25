@@ -64,4 +64,14 @@ public class AutenticacionService {
         usuario.setContraseña(null);
         return usuario;
     }
+
+    public boolean eliminarUsuario(int idUsuario) {
+        Optional<Usuario> usuarioOpt = usuarioRepository.findById(idUsuario);
+        if (usuarioOpt.isEmpty()) {
+            return false;
+        }
+        
+        usuarioRepository.deleteById(idUsuario);
+        return true;
+    }
 }

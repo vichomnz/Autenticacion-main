@@ -58,4 +58,17 @@ public class AuthController {
     public ResponseEntity<List<Usuario>> getAllUsuarios() {
         return ResponseEntity.ok(autenticacionService.getAllUsuarios());
     }
+
+    @DeleteMapping("/usuarios/{id}")
+    public ResponseEntity<RespuestaAutenticacion> eliminarUsuario(@PathVariable("id") int idUsuario) {
+        boolean eliminado = autenticacionService.eliminarUsuario(idUsuario);
+        RespuestaAutenticacion respuesta;
+        if (!eliminado) {
+            respuesta = new RespuestaAutenticacion("Error: Usuario no encontrado", null);
+            return new ResponseEntity<>(respuesta, HttpStatus.NOT_FOUND);
+        }
+
+        respuesta = new RespuestaAutenticacion("Usuario eliminado exitosamente", null);
+        return new ResponseEntity<>(respuesta, HttpStatus.OK);
+    }
 }

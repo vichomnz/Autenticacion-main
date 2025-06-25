@@ -127,4 +127,28 @@ public class AutenticacionServiceTest {
         verify(usuarioRepository).findById(1);
         verify(usuarioRepository).save(usuario);
     }
+
+    @Test
+    void testEliminarUsuarioExitoso() {
+        Usuario usuario = new Usuario();
+        usuario.setId_usuario(1);
+        usuario.setEmail("test@example.com");
+        when(usuarioRepository.findById(1)).thenReturn(Optional.of(usuario));
+
+        boolean resultado = autenticacionService.eliminarUsuario(1);
+
+        assertThat(resultado).isTrue();
+        verify(usuarioRepository).findById(1);
+        verify(usuarioRepository).deleteById(1);
+    }
+
+    @Test
+    void testEliminarUsuarioFallido() {
+        when(usuarioRepository.findById(1)).thenReturn(Optional.empty());
+
+        boolean resultado = autenticacionService.eliminarUsuario(1);
+
+        assertThat(resultado).isFalse();
+        verify(usuarioRepository).findById(1);
+    }
 }
