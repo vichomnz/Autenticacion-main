@@ -1,4 +1,5 @@
 package PerfulandiaSPA.Autenticacion.controller;
+
 import PerfulandiaSPA.Autenticacion.model.Usuario;
 import PerfulandiaSPA.Autenticacion.model.Rol;
 import PerfulandiaSPA.Autenticacion.service.AutenticacionService;
@@ -80,7 +81,7 @@ class AuthControllerTest {
         credentials.put("email", "juan@example.com");
         credentials.put("contraseña", "wrongpassword");
         
-        Usuario usuarioError = new Usuario(0, null, "juan@example.com", null, null);
+        Usuario usuarioError = new Usuario(0, null, "juan@example.com", null,Arrays.asList(Rol.ROL_USER));
         
         when(autenticacionService.login(eq("juan@example.com"), eq("wrongpassword"))).thenReturn(usuarioError);
 
